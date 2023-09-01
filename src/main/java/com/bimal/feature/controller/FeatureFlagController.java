@@ -1,6 +1,7 @@
 package com.bimal.feature.controller;
 
 import com.bimal.feature.model.FeatureFlag;
+import com.bimal.feature.service.AuditLogService;
 import com.bimal.feature.service.FeatureFlagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,9 @@ public class FeatureFlagController {
 
     @Autowired
     private FeatureFlagService featureFlagService;
+
+    @Autowired
+    private AuditLogService auditLogService;
 
     @GetMapping("/{name}")
     public FeatureFlag getFeatureFlag(@PathVariable String name) {
@@ -38,9 +42,17 @@ public class FeatureFlagController {
         return ResponseEntity.ok(isEnabled);
     }
 
+    @PostMapping("/{name}/toggle")
+    public ResponseEntity<String> toggleFeature(@PathVariable String name, @RequestParam String changedBy) {
+        featureFlagService.toggleFeatureFlag(name);
+        auditLogService.logChange(name, "TOGGLED", changedBy);
+        return ResponseEntity.ok("Feature toggled");
+    }
+
     @PostMapping
-    public ResponseEntity<FeatureFlag> createFeatureFlag(@RequestBody FeatureFlag featureFlag) {
-        FeatureFlag createdFlag = featureFlagService.createFeatureFlag(featureFlag);
-        return ResponseEntity.status(201).body(createdFlag);
+    public ResponseEntity<String> createFeatureFlag(@RequestBody FeatureFlag featureFlag) {
+        featureFlagService.createFeatureFlag(featureFlag);
+        auditLogService.logChange(featureFlag.getName(), "CREATED", "SYSTEM"); // Adjust the changedBy value as needed
+        return ResponseEntity.ok("Feature flag created");
     }
 }
