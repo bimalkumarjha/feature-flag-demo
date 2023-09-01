@@ -49,10 +49,17 @@ public class FeatureFlagController {
         return ResponseEntity.ok("Feature toggled");
     }
 
-    @PostMapping
+    /*@PostMapping
     public ResponseEntity<String> createFeatureFlag(@RequestBody FeatureFlag featureFlag) {
         featureFlagService.createFeatureFlag(featureFlag);
         auditLogService.logChange(featureFlag.getName(), "CREATED", "SYSTEM"); // Adjust the changedBy value as needed
         return ResponseEntity.ok("Feature flag created");
+    }*/
+    @PostMapping
+    public ResponseEntity<String> createFeatureFlag(@RequestBody FeatureFlag featureFlag) {
+        featureFlagService.createFeatureFlag(featureFlag);
+        auditLogService.logChange(featureFlag.getName(), "CREATED", "SYSTEM");
+        return ResponseEntity.ok("Feature flag created");
     }
+
 }
