@@ -35,4 +35,4 @@ This Spring Boot application demonstrates a simple implementation of **Feature F
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
+   git clone git clone https://github.com/bimalkumarjha/feature-flag-demo.git
