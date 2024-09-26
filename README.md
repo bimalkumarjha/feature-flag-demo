@@ -10,29 +10,31 @@ This Spring Boot application demonstrates a simple implementation of **Feature F
 - [Getting Started](#getting-started)
 - [Building the Project](#building-the-project)
 - [Testing the Application](#testing-the-application)
+- [Example Usage](#example-usage)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Features
 
 - **Manage Feature Flags**: Create, read, and toggle feature flags using a RESTful API.
+- **Role-Based Access Control**: Specify which user roles can access certain features.
 - **Dynamic Control**: Enable or disable features in real-time without the need for application restarts or deployments.
 - **Built with Spring Boot**: Utilizes Spring Boot for rapid development and ease of integration into existing microservices.
 
 ## Endpoints
 
 - `GET /api/feature-flags`: Retrieve all feature flags.
+  
 - `GET /api/feature-flags/{name}`: Get the status of a specific feature flag.
-- `POST /api/feature-flags/{name}/toggle`: Toggle the state of a specific feature flag.
+  
+- `POST /api/feature-flags`: Create a new feature flag.
 
-## Benefits
-
-- **Improved Deployment Practices**: Reduce the risk of deploying new features by testing them with a small subset of users first.
-- **User Experience Optimization**: Gather user feedback on new features before a full rollout.
-- **Version Control**: Easily manage different feature versions and configurations without code changes.
-
-## Getting Started
-
-1. Clone the repository:
-   ```bash
-   git clone <repository-url>
+  **Request Body Example:**
+  ```json
+  {
+      "name": "newFeature",
+      "enabled": true,
+      "roles": ["admin", "user"]
+  }
+- GET /api/feature-flags/{name}/status: Check if a feature is enabled for specified user
+- GET /api/feature-flags/newFeature/status?userRoles=admin,user
