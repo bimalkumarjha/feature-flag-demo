@@ -19,7 +19,9 @@ This Spring Boot application demonstrates a simple implementation of **Feature F
 - **Manage Feature Flags**: Create, read, and toggle feature flags using a RESTful API.
 - **Role-Based Access Control**: Specify which user roles can access certain features.
 - **Dynamic Control**: Enable or disable features in real-time without the need for application restarts or deployments.
+- **Audit Logging**: Track changes to feature flags, including who made the change and when.
 - **Built with Spring Boot**: Utilizes Spring Boot for rapid development and ease of integration into existing microservices.
+
 
 ## Endpoints
 
