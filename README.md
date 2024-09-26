@@ -33,3 +33,4 @@ This Spring Boot application demonstrates a simple implementation of **Feature F
       "enabled": true,
       "roles": ["admin", "user"]
   }
+- GET /api/feature-flags/newFeature/status?userRoles=admin,user
